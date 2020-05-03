@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Search from './components/searchbar'
+import MonsterList from './components/monster-list';
+ 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  constructor(){
+    super();
+    this.state={
+      Monsters:[],
+      searchfield:""
+    }
+  }
+  componentDidMount(){
+   fetch('http://dummy.restapiexample.com/api/v1/employees')
+   .then(response=>response.json())
+   .then(response=>this.setState({Monsters:response.data}));
+  }
+
+  render(){
+    const {Monsters,searchfield} = this.state;
+    const filtered = Monsters.filter(
+      monster=>monster.employee_name.toLowerCase().includes(searchfield.toLowerCase())
+    );
+    return(
+    <div>
+      <h3 className="title">Monsters Inc.</h3>
+      <Search handlechange={(e) => this.setState({searchfield : e.target.value})}></Search>
+      <MonsterList monsters = {filtered}></MonsterList>
+    </div>)
+  }
 }
 
 export default App;
