@@ -13,7 +13,7 @@ class App extends React.Component{
     }
   }
   componentDidMount(){
-   fetch('http://dummy.restapiexample.com/api/v1/employees')
+   fetch('https://reqres.in/api/users?page=2')
    .then(response=>response.json())
    .then(response=>this.setState({Monsters:response.data}));
   }
@@ -21,7 +21,7 @@ class App extends React.Component{
   render(){
     const {Monsters,searchfield} = this.state;
     const filtered = Monsters.filter(
-      monster=>monster.employee_name.toLowerCase().includes(searchfield.toLowerCase())
+      monster=>monster.first_name.toLowerCase().includes(searchfield.toLowerCase())
     );
     return(
     <div>

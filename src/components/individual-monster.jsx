@@ -5,12 +5,12 @@ const Card=(props)=>{
         <div className = "card-container">
          <img className = "hi" alt={"image " + props.element.id } src={`https://robohash.org/${props.element.id}/set=set1`}/>
          <div>
-            {props.element.id}
+            {props.element.id-6}
         </div>
-            {props.element.employee_name}
+            {props.element.first_name}
         
         <div>
-            {props.element.employee_salary%1000}
+            {props.element.email}
         </div>
         </div>
     )
